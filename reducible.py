@@ -65,6 +65,13 @@ def step_size(s):
     post: Returns the calculated step size as an integer based on the provided string.
     """
 
+    # Prime number is a prime value less than the length of hash list
+    # equation is defined as prime number - (key % prime number)
+    # Key is the hash index, which is returned from the hash_word function
+    # Step size is defined as 
+    hash_idx = hash_word(s, STEP_SIZE_CONSTANT)
+    step = STEP_SIZE_CONSTANT - (hash_idx % STEP_SIZE_CONSTANT)
+    return step
 
 # TODO: Modify this function. You may delete this comment when you are done.
 def insert_word(s, hash_table):
@@ -111,22 +118,40 @@ def get_longest_words(string_list):
     pre: string_list is a list of lowercase strings.
     post: Returns a list of words in string_list that have the maximum length.
     """
+    str_list= []
+    longest_length = 0
+    for elem in string_list:
+        longest_length = max(longest_length, len(elem))
+    for word in string_list:
+        if len(word) == longest_length:
+            str_list.append(word)
+    return str_list
 
 
 # TODO: Modify this function. You may delete this comment when you are done.
 def main():
     """The main function that calculates the longest reducible words"""
     # create an empty word_list
-
+    word_list = []
     # read words using input redirection
     # where each line read from input()
     # should be a single word. Append to word_list
     # ensure each word has no trailing white space.
 
     # find length of word_list
-
+    len_wordlist = len(word_list)
     # determine prime number N that is greater than twice
     # the length of the word_list
+
+    # Initializing prime_num and looping
+    prime_num = len_wordlist * 2
+    current_bool = False
+    while current_bool is False:
+        # Loop until prime_num returns true
+        current_bool = is_prime(prime_num)
+
+        # Update prime_num by 1, loops until current_bool is true
+        prime_num += 1
 
     # create an empty hash_list
 
