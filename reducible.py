@@ -83,7 +83,22 @@ def insert_word(s, hash_table):
     post: Inserts s into hash_table at the correct index; resolves any collisions
           by double hashing.
     """
+    size = len(hash_table)
+    index = hash_word(s, size)
+    step = step_size(s)
+    new_index = index
+    if hash_table[index] == "":
+        hash_table[index] = s
 
+    # Issues are when you double hash and you reach a filled spot again
+    else:
+        while hash_table[new_index] is not None:
+            new_index = (index + step) % size
+            index = new_index
+            # if index > size - 1:
+            #     while index > size - 1:
+            #         index = index - size - 1
+        hash_table[new_index] = s
 
 # TODO: Modify this function. You may delete this comment when you are done.
 def find_word(s, hash_table):
@@ -95,6 +110,12 @@ def find_word(s, hash_table):
     pre: s is a string, and hash_table is a list representing the hash table.
     post: Returns True if s is found in hash_table, otherwise returns False.
     """
+    
+    # Calculate hashing index
+    # Look at that specific index - if the string is not in that
+    # Index, then return false
+
+
 
 
 # TODO: Modify this function. You may delete this comment when you are done.
@@ -137,7 +158,10 @@ def main():
     # where each line read from input()
     # should be a single word. Append to word_list
     # ensure each word has no trailing white space.
-
+    cur = input()
+    while cur.strip().isalpha():
+        word_list.append(cur.strip())
+        cur = input()
     # find length of word_list
     len_wordlist = len(word_list)
     # determine prime number N that is greater than twice
@@ -154,10 +178,10 @@ def main():
         prime_num += 1
 
     # create an empty hash_list
-
     # populate the hash_list with N blank strings
-
+    hash_list = ["" * len_wordlist]
     # hash each word in word_list into hash_list
+
     # for collisions use double hashing
 
     # create an empty hash_memo of size M
