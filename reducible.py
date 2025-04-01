@@ -198,6 +198,9 @@ def main():
     # populate the hash_list with N blank strings
     hash_list = ["" * len_wordlist]
     # hash each word in word_list into hash_list
+    for word in word_list:
+        index = hash_word(word, len_wordlist)
+        insert_word(word, hash_list)
 
     # for collisions use double hashing
 
