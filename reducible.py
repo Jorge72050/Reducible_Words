@@ -49,6 +49,8 @@ def hash_word(s, size):
          hash table size or the constant for double hashing.
     post: Returns an integer index in the range [0, size - 1] where the string hashes to.
     """
+    # *26 makes it so that anagrams dont hash to the same value
+    # the entire string has one hash index it is mapped to
     hash_idx = 0
     for c in s:
         letter = ord(c) - 96
@@ -68,7 +70,7 @@ def step_size(s):
     # Prime number is a prime value less than the length of hash list
     # equation is defined as prime number - (key % prime number)
     # Key is the hash index, which is returned from the hash_word function
-    # Step size is defined as 
+    # Step size is defined as 3 (constant)
     hash_idx = hash_word(s, STEP_SIZE_CONSTANT)
     step = STEP_SIZE_CONSTANT - (hash_idx % STEP_SIZE_CONSTANT)
     return step
@@ -92,12 +94,12 @@ def insert_word(s, hash_table):
 
     # Issues are when you double hash and you reach a filled spot again
     else:
-        while hash_table[new_index] is not None:
+        while hash_table[new_index] != "":
+            # accounts for duplicates
+            if hash_table[new_index] == s:
+                break
             new_index = (index + step) % size
             index = new_index
-            # if index > size - 1:
-            #     while index > size - 1:
-            #         index = index - size - 1
         hash_table[new_index] = s
 
 # TODO: Modify this function. You may delete this comment when you are done.
@@ -110,12 +112,27 @@ def find_word(s, hash_table):
     pre: s is a string, and hash_table is a list representing the hash table.
     post: Returns True if s is found in hash_table, otherwise returns False.
     """
-    
     # Calculate hashing index
     # Look at that specific index - if the string is not in that
-    # Index, then return false
-
-
+    # index, then return false
+    size = len(hash_table)
+    counter = size
+    index = hash_word(s, size)
+    step = step_size(s)
+    new_index = index
+    # if there are no collisions
+    if s == hash_table[index]:
+        return True
+    # if there are collisions--need to find double hash index and check that
+    while hash_table[new_index] != "":
+        if s == hash_table[new_index]:
+            return True
+        new_index = (new_index + step) % size
+        # to prevent infinite loop of going through the hash table over and over again
+        counter -= 1
+        if counter == 0: # looked through everything already
+            break
+    return False
 
 
 # TODO: Modify this function. You may delete this comment when you are done.
