@@ -147,6 +147,29 @@ def is_reducible(s, hash_table, hash_memo):
           inserting s if reducible), otherwise returns False.
     """
 
+    # Create a sub-word by removing a letter from the word (find a way to 
+    # Remove any letter from the word
+    # If the word is valid, then start using this word with recursion and continue the first step
+
+    # Once a word is determined to be reducible, find a way to recursively go back to the word and 
+    # store all sub words of the first word, since once we find any of these sub-words in
+    # Other words we know they are reducible.
+
+    # Maybe for each recursive call, you can store all removed characters and 
+    # their respective index in a list, then re-add them to the word and keep 
+    # adding these words to the hash_memo
+
+    # Probably involves a double recursive call
+
+    length = len(s)
+    new_word = ""
+    for i in range(length):
+        for j in range(length):
+            if j != i:
+                new_word = s + 
+
+
+        if s 
 
 # TODO: Modify this function. You may delete this comment when you are done.
 def get_longest_words(string_list):
