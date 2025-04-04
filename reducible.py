@@ -147,29 +147,83 @@ def is_reducible(s, hash_table, hash_memo):
           inserting s if reducible), otherwise returns False.
     """
 
-    # Create a sub-word by removing a letter from the word (find a way to 
+    # Create a sub-word by removing a letter from the word (find a way to
     # Remove any letter from the word
     # If the word is valid, then start using this word with recursion and continue the first step
 
-    # Once a word is determined to be reducible, find a way to recursively go back to the word and 
-    # store all sub words of the first word, since once we find any of these sub-words in
-    # Other words we know they are reducible.
+    # Store all words for a reducible word in a list, and insert them all into the hash
+    # memo if the word does end up being reducible.
 
-    # Maybe for each recursive call, you can store all removed characters and 
-    # their respective index in a list, then re-add them to the word and keep 
-    # adding these words to the hash_memo
+    # Issue is inserting the valid words into the final list
+    original_word = s
+    valid_words = []
+    # def reducible_helper(s, hash_table, hash_memo, valid_words):
 
-    # Probably involves a double recursive call
+    #     # Immediately return true if at any point, the word is found in the hash memo
+    #     if find_word(s, hash_memo):
+    #         for elem in valid_words:
+    #             insert_word(elem, hash_memo)
+    #         return True
 
-    length = len(s)
-    new_word = ""
-    for i in range(length):
-        for j in range(length):
-            if j != i:
-                new_word = s + 
+    #     # Return if the string is s or o or i, do not append to hash memo
+    #     if s in ("i", "o", "a") and len(s) == 1:
+    #         for elem in valid_words:
+    #             insert_word(elem, hash_memo)
+    #         return True
 
+    #     # Return False if you reach a length of 1 and the word does not reduce to the
+    #     # 3 letters s, i, or o
+    #     if len(s) == 1:
+    #         return False
 
-        if s 
+    #     # Loop through all possible combinations of the word by removing a letter
+    #     length = len(s)
+    #     for i in range(length):
+    #         new_word = s[:i] + s[(i+1):]
+    #         if find_word(new_word, hash_table):
+    #             if reducible_helper(new_word, hash_table, hash_memo, valid_words):
+    #                 if not find_word(s, hash_memo):
+    #                     insert_word(s, hash_memo)
+    #             #valid_words.append(new_word)
+    #             #if reducible_helper(new_word, hash_table, hash_memo, valid_words):
+    #                 #break
+    #             return True
+    #     return False
+    # #for _ in range(orig_length):
+    # return reducible_helper(original_word, hash_table, hash_memo, valid_words)
+
+    original_word = s
+    def reducible_helper(s, hash_table, hash_memo):
+
+        # Immediately return true if at any point, the word is found in the hash memo
+        if find_word(s, hash_memo):
+            return True
+
+        # Return if the string is s or o or i, do not append to hash memo
+        if s in ("i", "o", "a") and len(s) == 1:
+            return True
+
+        # Return False if you reach a length of 1 and the word does not reduce to the
+        # 3 letters s, i, or o
+        if len(s) == 1:
+            return False
+
+        # Loop through all possible combinations of the word by removing a letter
+        length = len(s)
+        for i in range(length):
+            new_word = s[:i] + s[(i+1):]
+            if find_word(new_word, hash_table):
+                if reducible_helper(new_word, hash_table, hash_memo):
+                    if not find_word(s, hash_memo):
+                        insert_word(s, hash_memo)
+                #valid_words.append(new_word)
+                #if reducible_helper(new_word, hash_table, hash_memo, valid_words):
+                    #break
+                return True
+        return False
+    #for _ in range(orig_length):
+    return reducible_helper(original_word, hash_table, hash_memo)
+
 
 # TODO: Modify this function. You may delete this comment when you are done.
 def get_longest_words(string_list):
