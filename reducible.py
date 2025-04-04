@@ -147,14 +147,20 @@ def is_reducible(s, hash_table, hash_memo):
           inserting s if reducible), otherwise returns False.
     """
 
-    # Create a sub-word by removing a letter from the word (find a way to
+    # Create a sub-word by removing a letter from the word (find a way to 
     # Remove any letter from the word
     # If the word is valid, then start using this word with recursion and continue the first step
 
-    # Store all words for a reducible word in a list, and insert them all into the hash
-    # memo if the word does end up being reducible.
+    # Once a word is determined to be reducible, find a way to recursively go back to the word and 
+    # store all sub words of the first word, since once we find any of these sub-words in
+    # Other words we know they are reducible.
 
-    # Issue is inserting the valid words into the final list
+    # Maybe for each recursive call, you can store all removed characters and 
+    # their respective index in a list, then re-add them to the word and keep 
+    # adding these words to the hash_memo
+
+    # Probably involves a double recursive call
+
     original_word = s
     valid_words = []
     # def reducible_helper(s, hash_table, hash_memo, valid_words):
