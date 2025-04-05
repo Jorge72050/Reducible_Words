@@ -15,7 +15,7 @@ Students. Academic penalties up to and including an F in the course are likely.
 UT EID 1: jn29423
 UT EID 2: wz5363
 """
-
+import sys
 # the constant used to calculate the step size
 STEP_SIZE_CONSTANT = 3
 
@@ -135,7 +135,7 @@ def find_word(s, hash_table):
     return False
 
 
-# TODO: Modify this function. You may delete this comment when you are done.
+
 def is_reducible(s, hash_table, hash_memo):
     """
     Determines if a string is reducible using a recursive check.
@@ -189,7 +189,6 @@ def is_reducible(s, hash_table, hash_memo):
     #for _ in range(orig_length):
     return reducible_helper(original_word, hash_table, hash_memo)
 
-# TODO: Modify this function. You may delete this comment when you are done.
 def get_longest_words(string_list):
     """
     Finds longest words from a list.
@@ -207,7 +206,6 @@ def get_longest_words(string_list):
     return str_list
 
 
-# TODO: Modify this function. You may delete this comment when you are done.
 def main():
     """The main function that calculates the longest reducible words"""
     # create an empty word_list
@@ -216,10 +214,8 @@ def main():
     # where each line read from input()
     # should be a single word. Append to word_list
     # ensure each word has no trailing white space.
-    cur = input()
-    while cur.strip().isalpha():
-        word_list.append(cur.strip())
-        cur = input()
+    for line in sys.stdin:
+        word_list.append(line.strip())
     # find length of word_list
     len_wordlist = len(word_list)
     # determine prime number N that is greater than twice
