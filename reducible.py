@@ -243,7 +243,6 @@ def main():
     # let us assume it is 10 percent (fairly safe) of the words
     # then M is a prime number that is slightly greater than
     # 0.2 * size of word_list
-    
     # populate the hash_memo with M blank strings
     len_memo = .2 * len_wordlist
     while not is_prime(len_memo):
