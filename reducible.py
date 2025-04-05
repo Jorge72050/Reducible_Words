@@ -243,7 +243,7 @@ def main():
     len_memo = .2 * len_wordlist
     while not is_prime(len_memo):
         len_memo += 1
-    hash_memo = [""] * len_memo
+    hash_memo = [""] * int(len_memo)
     # create an empty list reducible_words
     reducible_words = []
     for word in word_list:
