@@ -220,12 +220,14 @@ def is_reducible(s, hash_table, hash_memo):
             new_word = s[:i] + s[(i+1):]
             if find_word(new_word, hash_table):
                 if reducible_helper(new_word, hash_table, hash_memo):
-                    if not find_word(s, hash_memo):
-                        insert_word(s, hash_memo)
+                    insert_word(s, hash_memo)
+                    return True
+                    # if not find_word(s, hash_memo):
+                    #     insert_word(s, hash_memo)
                 #valid_words.append(new_word)
                 #if reducible_helper(new_word, hash_table, hash_memo, valid_words):
                     #break
-                return True
+                # return True
         return False
     #for _ in range(orig_length):
     return reducible_helper(original_word, hash_table, hash_memo)
