@@ -58,7 +58,7 @@ def hash_word(s, size):
     return hash_idx
 
 
-# TODO: Modify this function. You may delete this comment when you are done.
+
 def step_size(s):
     """
     Calculates step size for double hashing using STEP_SIZE_CONSTANT.
@@ -75,7 +75,7 @@ def step_size(s):
     step = STEP_SIZE_CONSTANT - (hash_idx % STEP_SIZE_CONSTANT)
     return step
 
-# TODO: Modify this function. You may delete this comment when you are done.
+
 def insert_word(s, hash_table):
     """
     Inserts a string into the hash table using double hashing for collision resolution.
@@ -102,7 +102,6 @@ def insert_word(s, hash_table):
             index = new_index
         hash_table[new_index] = s
 
-# TODO: Modify this function. You may delete this comment when you are done.
 def find_word(s, hash_table):
     """
     Searches for a string in the hash table.
