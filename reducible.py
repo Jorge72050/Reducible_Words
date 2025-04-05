@@ -296,16 +296,18 @@ def main():
     # 0.2 * size of word_list
 
     # populate the hash_memo with M blank strings
-
+    hash_memo = [""] * M
     # create an empty list reducible_words
-
+    reducible_words = []
     # for each word in the word_list recursively determine
     # if it is reducible, if it is, add it to reducible_words
     # as you recursively remove one letter at a time check
     # first if the sub-word exists in the hash_memo. if it does
     # then the word is reducible and you do not have to test
     # any further. add the word to the hash_memo.
-
+    for word in word_list:
+        if is_reducible(word, hash_list, hash_memo):
+            reducible_words.append(word)
     # find the largest reducible words in reducible_words
 
     # print the reducible words in alphabetical order
